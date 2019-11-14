@@ -1,0 +1,15 @@
+Arpeggio==1.9.2
+attrs==19.3.0
+dill==0.3.1.1
+Django==2.2.7
+enum34==1.1.6
+futures==3.1.1
+grpcio==1.25.0
+parver==0.2.1
+protobuf==3.10.0
+pulumi==1.5.2
+pulumi-aws==1.8.0
+pytz==2019.3
+semver==2.9.0
+six==1.13.0
+sqlparse==0.3.0
