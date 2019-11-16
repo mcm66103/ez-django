@@ -1,0 +1,28 @@
+{% extends 'maverick/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>{{ blog.title }}</title>
+    <meta content='{{ blog.description }}' name="description"/>
+    <meta content='{{ blog.keywords }}' name="keywords" />
+    <meta property="fb:app_id" content="583376089067115">
+    <meta property="og:title" content="{{ blog.title }}" />
+    <meta property="og:url" content="{{ BASE_URL }}/{{ blog.slug }}/" />
+    <meta property="og:description" content="{{ post.description }}" />
+    <meta property="og:image" content="{% media {{ blog.featured_image.file }} %}" />
+    <meta property="og:type" content="website" />
+{% endblock %}
+
+
+{% block content %}
+    <div class="pt-3">
+        <div class="container">
+            <div class="col-md-8 offset-md-2 shadow-primary p-5 mb-5" id="content-container">
+                <h1>{{ blog.title }}</h1>
+                {{ blog.content | safe }}
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'ez_django/js/blog-content-embedded-cta.js' %}"
+{% endblock %}
+

@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 def blog_list(request):
-    context = {}
+    context = {
+        "posts": Post.objects.all().filter(status='P')}
     return render(request, 'blog/blog_list.html', context)
 
 def blog_detail(request, slug):
