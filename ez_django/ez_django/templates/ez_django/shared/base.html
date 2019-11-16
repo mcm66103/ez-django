@@ -1,4 +1,6 @@
 {% load staticfiles %}
+{% load insert_image %}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,93 +12,40 @@
         <link rel="shortcut icon" type="image/png" href="">
 
 
-        <!-- {% include 'ez_django/shared/tracking_header_mailchimp.html' %} -->
-
-
-        {% include 'ez_django/shared/font_awesome.html' %}
-
         <!-- Custom Stylesheet -->
-        <link rel="stylesheet" href="{% static 'maverick/css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'ez_django/css/styles.css' %}">
 
-        {% include 'maverick/header-snippets.html' %}
+
+        {% for snippet in boh_snippets %}
+            {{ snippet.snippet|safe }}
+        {% endfor %}
+
+
+        {% include 'ez_django/shared/header.html' %}
 
 
         {% block head %}
         {% endblock %}
 
+
+        {% for snippet in eoh_snippets %}
+            {{ snippet.snippet|safe }}
+        {% endfor %}
     </head>
 
-    <body class="page-home" id="page-home">
 
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0"></script>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=583376089067115&autoLogAppEvents=1"></script>        <div class="container-fluid d-none d-md-block">
-            <div class="row">
-                <div class="col-12 p-2">
-                    <div class="d-flex">
-                        <div class="align-self-center d-flex justify-content-center w-100">
-                            <i class="align-self-center fas fa-exclamation-triangle"></i>
-                            <p class="align-self-center my-0 py-0 mr-2"><b>Struggling to grow your audience?</b></p>
-                            <a class="button btn mr-2" href="/digital-strategy">I'm ready to 10x my audience</a>
-                            <a class="button btn mr-3" href="/digital-strategy">No! I've got it all figured out</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="header bg-turquoise container-fluid">
-            <div class="container">
-                <div class="social-links text-right">
-                    <a href="https://github.com/mcm66103" target="_blank">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://www.instagram.com/maverick_650/?hl=en" target="_blank">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/maverick-moore-28957214a/" target="_blank">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="{% url 'blog' %}" target="_blank">
-                        <i class="fas fa-book"></i>
-                    </a>
-                    {% webpush_button %}
-                </div>
-                <div class="profile d-flex">
-                    <a href="{% url 'home' %}" rel="nofollow">
-                        <div id="headshot"></div>
-                    </a>
-                    <div class="header-text">
-                        <a href="{% url 'home' %}" style="text-decoration:none;"><h1 class="wordmark">Maverick Moore</h1></a>
-                        <h2 class="tagline">marketer<span class="font-code"> && </span>developer</h2>
-                    </div>
-                </div>
-            </div>
-        </div><!-- End header -->
+    <body>
+    {% for snippet in bob_snippets %}
+        {{ snippet.snippet|safe }}
+    {% endfor %}
 
-        {% block content %}
-        {% endblock %}
-
-        <!-- Footer -->
-        <div class="footer container-fluid">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 d-flex justify-content-between">
-                        <div>
-                            <p class="text-center">&copy; 20{% now "y" %}, Maverick Moore. Eat Soylent.</p>
-                        </div>
-                        <div>
-                            <a href="{% url 'Privacy Policy' %}" class="footer-link">Privacy Policy</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><!-- End footer -->
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    </body>
-    {% block scripts %}
+    {% block content %}
     {% endblock %}
+
+    {% include 'ez_django/shared/footer.html %}
+
+    {% for snippet in eob_snippets %}
+        {{ snippet.snippet|safe }}
+    {% endfor %}
+    </body>
 </html>

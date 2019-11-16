@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
-from ez_django.local_settings import (SECRET_KEY, STATIC_URL, MEDIA_URL, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY,
+from ez_django.local_settings import (SECRET_KEY, ENV, STATIC_URL, MEDIA_URL, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY,
                                       AWS_STORAGE_BUCKET_NAME)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'storages',
-    'django-tinymce',
+    'tinymce',
 
+    'images',
     'snippets',
     'blog',
 ]
@@ -74,6 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'ez_django.context_processors.custom_context',
             ],
         },
     },
@@ -125,7 +127,13 @@ USE_L10N = True
 
 USE_TZ = True
 
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'blog/static')
+# ]
 
+if ENV != 'dev':
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    DEFAULT_FILE_STORAGE = 'ez_django.storage_backends.MediaStorage'
 
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
@@ -133,10 +141,4 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400'
 }
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'blog/static')
-# ]
 
-
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-DEFAULT_FILE_STORAGE = 'ez_django.storage_backends.MediaStorage'
