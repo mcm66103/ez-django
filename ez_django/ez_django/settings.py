@@ -15,6 +15,7 @@ import os
 from ez_django.local_settings import (SECRET_KEY, ENV, STATIC_URL, MEDIA_URL, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY,
                                       AWS_STORAGE_BUCKET_NAME, BASE_URL)
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'storages',
     'tinymce',
 
+    'site_info',
     'images',
     'snippets',
     'blog',
@@ -142,3 +144,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 
 FB_APP_ID = '583376089067115'
+
+FIXTURES_DIRS = [
+    os.path.join(BASE_DIR, "ez_django/fixtures")
+]

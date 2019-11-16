@@ -2,14 +2,14 @@
 {% load static %}
 
 {% block head %}
-    <title>{{ blog.title }}</title>
-    <meta content='{{ blog.description }}' name="description"/>
-    <meta content='{{ blog.keywords }}' name="keywords" />
-    <meta property="fb:app_id" content="583376089067115">
-    <meta property="og:title" content="{{ blog.title }}" />
-    <meta property="og:url" content="{{ BASE_URL }}/{{ blog.slug }}/" />
+    <title>{{ post.title }}</title>
+    <meta content='{{ post.description }}' name="description"/>
+    <meta content='{{ post.keywords }}' name="keywords" />
+    <meta property="fb:app_id" content="{{ FB_APP_ID }}">
+    <meta property="og:title" content="{{ post.title }}" />
+    <meta property="og:url" content="{{ BASE_URL }}/{{ post.slug }}/" />
     <meta property="og:description" content="{{ post.description }}" />
-    <meta property="og:image" content="{% media {{ blog.featured_image.file }} %}" />
+    <meta property="og:image" content="{% media {{ post.featured_image.file }} %}" />
     <meta property="og:type" content="website" />
 {% endblock %}
 

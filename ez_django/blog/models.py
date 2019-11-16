@@ -1,5 +1,5 @@
 from django.db import models
-from tinymce import models as tinymce_models
+from tinymce import HTMLField
 
 # Create your models here.
 class Post(models.Model):
@@ -13,7 +13,7 @@ class Post(models.Model):
 
     title = models.CharField(max_length=128)
     slug = models.CharField(max_length=256)
-    content = tinymce_models.HTMLField('Content')
+    content = HTMLField('Content')
     published = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=2, choices=status_choices)
     description = models.TextField()
