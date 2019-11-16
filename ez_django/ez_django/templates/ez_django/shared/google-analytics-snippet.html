@@ -1,0 +1,13 @@
+{% if DEBUG == 'True' %}
+    <!-- Global site tag (gtag.js) - Google Analytics-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-127522816-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-127522816-1');
+    </script>
+{% else %}
+    <!-- Development environment detected. Not using GA tracking snippet. -->
+{% endif %}

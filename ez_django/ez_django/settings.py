@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'storages',
+    'django-tinymce',
+
+    'snippets',
+    'blog',
 ]
 
 
@@ -60,7 +64,9 @@ ROOT_URLCONF = 'ez_django.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            'ez_django/templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
