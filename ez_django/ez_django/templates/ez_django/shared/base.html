@@ -7,9 +7,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
+        <meta name="description" content="{{ SITE_DESCRIPTION }}">
+        <meta name="keywords" content="{{ SITE_KEYWORDS }}">
 
         <!-- Favicon -->
-        <link rel="shortcut icon" type="image/png" href="">
+        <link rel="shortcut icon" type="image/png" href="{{ STATIC_URL }}{{ FAVICON }}">
 
 
         <!-- Custom Stylesheet -->
@@ -21,9 +23,6 @@
         {% endfor %}
 
 
-        {% include 'ez_django/shared/header.html' %}
-
-
         {% block head %}
         {% endblock %}
 
@@ -33,19 +32,20 @@
         {% endfor %}
     </head>
 
-
     <body>
-    {% for snippet in bob_snippets %}
-        {{ snippet.snippet|safe }}
-    {% endfor %}
+        {% include 'ez_django/shared/header.html' %}
 
-    {% block content %}
-    {% endblock %}
+        {% for snippet in bob_snippets %}
+            {{ snippet.snippet|safe }}
+        {% endfor %}
 
-    {% include 'ez_django/shared/footer.html %}
+        {% block content %}
+        {% endblock %}
 
-    {% for snippet in eob_snippets %}
-        {{ snippet.snippet|safe }}
-    {% endfor %}
+        {% include 'ez_django/shared/footer.html' %}
+
+        {% for snippet in eob_snippets %}
+            {{ snippet.snippet|safe }}
+        {% endfor %}
     </body>
 </html>

@@ -20,5 +20,5 @@ from blog.views import blog_list, blog_detail
 
 urlpatterns = [
     path('', blog_list, name='blog_list'),
-    path('<str: slug>/', blog_detail, name='blog_detail'),
+    path('<slug>/', blog_detail, name='blog_detail'),
 ]
