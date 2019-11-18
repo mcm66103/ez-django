@@ -18,6 +18,7 @@ class SiteInfo(models.Model):
     blog_description = models.CharField(max_length=256)
     blog_name = models.CharField(max_length=256)
     blog_image = models.ImageField(upload_to='site_info/')
+    fb_app_id = models.CharField(max_length=255)
 
     def save(self, *args, **kwargs):
         if not self.pk and SiteInfo.objects.exists():

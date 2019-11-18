@@ -19,11 +19,20 @@
         <div class="container">
             <div class="col-md-8 offset-md-2 shadow-primary p-5 mb-5" id="content-container">
                 <h1>{{ post.title }}</h1>
-                <img src="{{ MEDIA_URL }}{{ post.featured_image.file }}" class="w-100">
-                {{ post.content | safe }}
+                <img src="{{MEDIA_URL}}{{post.featured_image.file}}" class="w-100">
+                <div id="#content-container">
+                    {{ post.content | safe }}
+                </div>
             </div>
         </div>
     </div>
-    <script src="{% static 'ez_django/js/blog-content-embedded-cta.js' %}"></script>
 {% endblock %}
 
+{% block scripts %}
+    {% if BLOG_CTA %}
+        <script>
+            $('<div class="mt-3 alert alert-warning d-flex justify-content-center" role="alert"><p class="mb-0 pb-0">{{ BLOG_CTA_MESSAGE }} <a href="{{ BLOG_CTA_LINK }}">{{BLOG_CTA}}</a><p></div>')
+            .insertAfter($("#content-container").find("p:nth-child(6)"));
+        </script>
+    {% endif %}
+{% endblock %}

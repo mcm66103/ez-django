@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'images',
     'snippets',
     'blog',
+    'call_to_actions',
 ]
 
 
@@ -77,7 +78,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'ez_django.context_processors.custom_context',
+                'call_to_actions.context_processors.call_to_actions.call_to_actions_context',
+                'ez_django.context_processors.ez_django.ez_django_context',
+                'site_info.context_processors.site_info.site_info_context',
+                'snippets.context_processors.snippets.snippet_context',
             ],
         },
     },
@@ -130,7 +134,8 @@ USE_L10N = True
 USE_TZ = True
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'ez_django/static')
+    os.path.join(BASE_DIR, 'ez_django/static'),
+    os.path.join(BASE_DIR, 'blog/static'),
 ]
 
 if ENV != 'dev':

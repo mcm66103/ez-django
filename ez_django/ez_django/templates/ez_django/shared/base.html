@@ -33,6 +33,17 @@
     </head>
 
     <body>
+
+        {% if HEADER_CTA %}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-center py-2">
+                        <p class="mr-2 my-0 align-self-center">{{ HEADER_CTA_MESSAGE }} </p><a href="{{ HEADER_CTA_LINK }}" class="btn btn-primary">{{HEADER_CTA}}</a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
         {% include 'ez_django/shared/header.html' %}
 
         {% for snippet in bob_snippets %}
@@ -47,5 +58,8 @@
         {% for snippet in eob_snippets %}
             {{ snippet.snippet|safe }}
         {% endfor %}
+
+        {% block scripts %}
+        {% endblock %}
     </body>
 </html>
