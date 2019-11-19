@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 from ez_django.local_settings import (SECRET_KEY, ENV, STATIC_URL, MEDIA_URL, MEDIA_ROOT, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY,
-                                      AWS_STORAGE_BUCKET_NAME, BASE_URL, DEBUG, DB_NAME, DB_USER, DB_PASSWORD)
+                                      AWS_STORAGE_BUCKET_NAME, BASE_URL, DEBUG, DB_NAME, DB_USER, DB_PASSWORD, DOMAIN_NAME)
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [DOMAIN_NAME]
 
 
 # Application definition
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'snippets',
     'blog',
     'call_to_actions',
+    'accounts',
 ]
 
 
@@ -135,6 +136,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = "accounts.Account"
+
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'ez_django/static'),
 ]
@@ -148,9 +152,3 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400'
 }
-
-FB_APP_ID = '583376089067115'
-
-FIXTURES_DIRS = [
-    os.path.join(BASE_DIR, "ez_django/fixtures")
-]
