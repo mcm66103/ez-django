@@ -12,8 +12,42 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
-from ez_django.local_settings import (SECRET_KEY, ENV, STATIC_URL, MEDIA_URL, MEDIA_ROOT, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY,
-                                      AWS_STORAGE_BUCKET_NAME, BASE_URL, DEBUG, DB_NAME, DB_USER, DB_PASSWORD, DOMAIN_NAME)
+import environ
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False),
+    SECRET_KEY=(str, ""),
+    ENV=(str, ""),
+    STATIC_URL=(str, ""),
+    MEDIA_URL=(str, ""),
+    MEDIA_ROOT=(str, ""),
+    AWS_ACCESS_KEY_ID=(str, ""),
+    AWS_SECRET_ACCESS_KEY=(str, ""),
+    AWS_STORAGE_BUCKET_NAME=(str, ""),
+    BASE_URL=(str, ""),
+    DB_NAME=(str, ""),
+    DB_USER=(str, ""),
+    DB_PASSWORD=(str, ""),
+    DOMAIN_NAME=(str, ""),
+)
+
+environ.Env.read_env()
+
+SECRET_KEY=env("SECRET_KEY")
+ENV=env("ENV")
+STATIC_URL=env("STATIC_URL")
+MEDIA_URL=env("MEDIA_URL")
+MEDIA_ROOT=env("MEDIA_ROOT")
+AWS_ACCESS_KEY_ID=env("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY=env("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME=env("AWS_STORAGE_BUCKET_NAME")
+BASE_URL=env("BASE_URL")
+DEBUG=env("DEBUG")
+DB_NAME=env("DB_NAME")
+DB_USER=env("DB_USER")
+DB_PASSWORD=env("DB_PASSWORD")
+DOMAIN_NAME=env("DOMAIN_NAME")
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -49,7 +83,6 @@ INSTALLED_APPS = [
     'call_to_actions',
     'accounts',
 ]
-
 
 
 MIDDLEWARE = [
@@ -143,7 +176,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'ez_django/static'),
 ]
 
-if ENV != 'dev':
+if ENV != 'development':
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     DEFAULT_FILE_STORAGE = 'ez_django.storage_backends.MediaStorage'
 

@@ -17,8 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 from django.contrib.auth import urls as auth_urls
-from .local_settings import MEDIA_URL, MEDIA_ROOT
-
+from django.conf import settings
 
 from . import views
 
@@ -28,4 +27,4 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('accounts/', include(auth_urls)),
     path('tinymce/', include('tinymce.urls')),
-] + static(MEDIA_URL, document_root=MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

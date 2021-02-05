@@ -1,5 +1,5 @@
 from django.db import models
-from tinymce import HTMLField
+from tinymce.models import HTMLField
 
 from images.models import Image
 # Create your models here.
