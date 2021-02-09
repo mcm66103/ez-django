@@ -2,6 +2,11 @@ from django.db import models
 
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
+from django.core.mail import send_mail
+from django.urls import reverse_lazy
+
+from .helpers import generate_confirmation_number
+from .mailers import AccountMailer
 
 from accounts.managers import AccountManager
 
@@ -15,5 +20,16 @@ class Account(AbstractUser):
 
     objects = AccountManager()
 
+    confirmation_number = models.CharField(max_length=32, default=generate_confirmation_number)
+    confirmed_at = models.DateTimeField(blank=True, null=True)
+
     def __str__(self):
         return self.email
+
+    def save(self, *args, **kwargs):
+        if self.confirmed_at == False and self.pk != None:
+            AccountManager.account_confirmation_email(self)
+        super(Account, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse_lazy('profile')

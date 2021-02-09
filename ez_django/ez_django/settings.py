@@ -102,6 +102,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             'ez_django/templates',
+            'accounts/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -112,6 +113,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'call_to_actions.context_processors.call_to_actions.call_to_actions_context',
                 'ez_django.context_processors.ez_django.ez_django_context',
+                'ez_django.context_processors.ez_django.is_authenticated',
                 'site_info.context_processors.site_info.site_info_context',
                 'snippets.context_processors.snippets.snippet_context',
             ],
@@ -185,3 +187,17 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400'
 }
+
+# Django Email Settings
+# https://docs.djangoproject.com/en/3.1/topics/email/#topic-email-console-backend
+
+if env('ENV') == 'development':
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = '<Your Gmail address>'
+    EMAIL_HOST_PASSWORD = '<Your Gmail password>'
+    EMAIL_USE_TLS = True
