@@ -27,9 +27,15 @@ class Account(AbstractUser):
         return self.email
 
     def save(self, *args, **kwargs):
-        if self.confirmed_at == False and self.pk != None:
-            AccountManager.account_confirmation_email(self)
+        if self.pk == None:
+            self.send_account_confirmation_email()
         super(Account, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse_lazy('profile')
+    
+    def is_confirmed(self):
+        return self.confirmed_at == None
+
+    def send_account_confirmation_email(self):
+        AccountMailer().account_confirmation_email(self)
