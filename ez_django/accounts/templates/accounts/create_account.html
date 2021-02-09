@@ -1,0 +1,9 @@
+{% extends 'ez_django/shared/base.html' %}
+
+{% block content %}
+    <h1>Create Account</h1>
+    {% include 'accounts/_account_form.html' with value="create account" %}
+
+    <a href="{% url 'login' %}">Login</a><br>
+    <a href="{% url 'reset_password' %}">Forgot Password</a>
+{% endblock %}
