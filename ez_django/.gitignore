@@ -1,4 +1,2 @@
-/static/*
-/media/*
-*.env
-*.DS_Store
+.env
+local_settings.py
